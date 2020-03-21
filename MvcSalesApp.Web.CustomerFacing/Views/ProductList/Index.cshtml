@@ -1,0 +1,55 @@
+﻿@model MvcSalesApp.Web.CustomerFacing.ViewModels.ShoppingViewModel
+
+@{
+  ViewBag.Title = "ProductList";
+}
+<script type="text/javascript">
+    function updateQuantity(obj, productId) {
+        var ddl = $("#selectorForProductId" + productId);
+        obj.href = obj.href.replace("quant=0", "quant=" + ddl[0].value);
+    }
+</script>
+<h2>ProductList</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].CurrentUnitPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Products) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentUnitPrice)
+        </td>
+
+        <td>
+              <select id=@("selectorForProductId"+item.ProductId)>
+                @for (var i = 1; i <= item.MaxQuantity; i++) {
+                <option>@i</option>
+                }
+            </select>
+        </td>
+  
+            <td>
+                @Html.ActionLink("Add to Cart", "ItemSelected", "Cart",
+             new { productId = item.ProductId, quant = 0,unitPrice=item.CurrentUnitPrice, memberCookie="",cartId=@Model.CartId },
+             new { @class = "btn btn-primary", @style = "color:white",
+                 onclick = "updateQuantity(this," + item.ProductId + ");" })
+     
+    </tr>
+    }
+</table>

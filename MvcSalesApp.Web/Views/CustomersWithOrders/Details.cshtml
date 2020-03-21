@@ -1,0 +1,40 @@
+﻿@model Maintenance.Domain.ViewModels.CustomerViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CustomerViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderCount)
+        </dd>
+    
+    </dl>
+    <ul >
+        @foreach (var order in Model.Orders) {
+        <li>@order.OrderDate.ToShortDateString(), @order.OrderSource</li>
+        }
+    </ul>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.CustomerId }) |*@
+    Edit|
+    @Html.ActionLink("Back to List", "Index")
+</p>

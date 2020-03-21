@@ -1,0 +1,3 @@
+﻿@model DateTime?
+@(Model.HasValue ? Html.Raw(Model.Value.ToString("dd/MM/yyyy")) : null)
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Maintenance.Domain.ViewModels.CustomerViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customers with Orders</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderCount)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Details", new { id = item.CustomerId })
+            
+      
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderCount)
+        </td>
+    </tr>
+}
+
+</table>
